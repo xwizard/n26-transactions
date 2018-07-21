@@ -1,9 +1,13 @@
 package com.example.n26.n26transactions.core;
 
+import java.time.Clock;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Transaction {
+
+  private final static long ONE_MINUTE = 60_000;
+
   private double amount;
   private long timestamp;
   private UUID id;
@@ -14,6 +18,10 @@ public class Transaction {
     this.amount = amount;
     this.timestamp = timestamp;
     this.id = UUID.randomUUID();
+  }
+
+  public boolean hasExpired(Clock clock) {
+    return clock.millis() - ONE_MINUTE >= timestamp;
   }
 
   public double getAmount() {

@@ -23,7 +23,7 @@ public class TransactionQueueImpl implements TransactionQueue {
 
   @Override
   public boolean put(Transaction transaction) {
-    if (clock.millis() - ONE_MINUTE < transaction.getTimestamp() ) {
+    if (!transaction.hasExpired(clock)) {
       queue.add(transaction);
       return true;
     }

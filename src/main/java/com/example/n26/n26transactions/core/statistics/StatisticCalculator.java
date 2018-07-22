@@ -4,8 +4,9 @@ import java.util.List;
 
 /**
  * Calculates statistic for given data
- * @param <T> type of data
+ * @param <S> data series type
+ * @param <R> return type
  */
-public interface StatisticCalculator<T> {
-  T calculate(List<T> data);
+public interface StatisticCalculator<S, R> {
+  R calculate(List<S> data);
 }

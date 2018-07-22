@@ -2,6 +2,8 @@ package com.example.n26.n26transactions.core.statistics;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Objects;
+
 /**
  * Snapshot of statistics.
  */
@@ -50,5 +52,36 @@ public class StatisticsSnapshot {
 
   public long getCount() {
     return count;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    StatisticsSnapshot snapshot = (StatisticsSnapshot) o;
+    return timestamp == snapshot.timestamp &&
+        Double.compare(snapshot.sum, sum) == 0 &&
+        Double.compare(snapshot.average, average) == 0 &&
+        Double.compare(snapshot.max, max) == 0 &&
+        Double.compare(snapshot.min, min) == 0 &&
+        count == snapshot.count;
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(timestamp, sum, average, max, min, count);
+  }
+
+  @Override
+  public String toString() {
+    return "StatisticsSnapshot{" +
+        "timestamp=" + timestamp +
+        ", sum=" + sum +
+        ", average=" + average +
+        ", max=" + max +
+        ", min=" + min +
+        ", count=" + count +
+        '}';
   }
 }

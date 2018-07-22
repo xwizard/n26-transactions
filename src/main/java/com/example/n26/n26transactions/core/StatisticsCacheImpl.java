@@ -17,9 +17,9 @@ public class StatisticsCacheImpl implements StatisticsCache {
   public void set(StatisticsSnapshot snapshot) {
     if (snapshot == null) {
       cachedSnapshot.set(StatisticsSnapshot.ZERO);
-      return;
+    } else {
+      cachedSnapshot.set(snapshot);
     }
-    cachedSnapshot.set(snapshot);
   }
 
   @Override

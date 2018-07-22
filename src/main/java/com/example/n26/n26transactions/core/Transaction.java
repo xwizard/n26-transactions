@@ -15,8 +15,6 @@ public class Transaction {
   private long timestamp;
   private UUID id;
 
-  private Transaction() {}
-
   public Transaction(double amount, long timestamp) {
     this.amount = amount;
     this.timestamp = timestamp;
@@ -35,14 +33,6 @@ public class Transaction {
 
   public double getAmount() {
     return amount;
-  }
-
-  public long getTimestamp() {
-    return timestamp;
-  }
-
-  public UUID getId() {
-    return id;
   }
 
   @Override

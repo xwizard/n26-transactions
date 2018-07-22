@@ -16,4 +16,13 @@ public class StatisticsCacheImplTest {
 
     assertEquals(StatisticsSnapshot.ZERO, actual);
   }
+
+  @Test
+  public void setShouldSetStatistic() {
+    StatisticsSnapshot statisticsSnapshot = new StatisticsSnapshot(0,0,0,0,0,0);
+    cache.set(statisticsSnapshot);
+    StatisticsSnapshot actual = cache.get();
+
+    assertEquals(statisticsSnapshot, actual);
+  }
 }

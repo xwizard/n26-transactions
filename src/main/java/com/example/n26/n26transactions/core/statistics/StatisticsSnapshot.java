@@ -1,5 +1,7 @@
 package com.example.n26.n26transactions.core.statistics;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Snapshot of statistics.
  */
@@ -7,7 +9,8 @@ public class StatisticsSnapshot {
 
   public static final StatisticsSnapshot ZERO = new StatisticsSnapshot();
 
-  private transient long timestamp = 0 ;
+  @JsonIgnore
+  private long timestamp = 0 ;
   private double sum = 0;
   private double average = 0;
   private double max = 0;

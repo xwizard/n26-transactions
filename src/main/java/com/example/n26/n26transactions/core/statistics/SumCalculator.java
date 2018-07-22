@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Calculates sum of data series.
+ */
 @Service
 public class SumCalculator implements StatisticCalculator<Double, Double> {
   @Override

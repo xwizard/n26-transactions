@@ -12,24 +12,28 @@ import java.time.Clock;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
+/**
+ * Default and only implementation.
+ * Implements {@link Runnable} and submits itself to {@link Executor}.
+ * Processes incoming transactions in infinite loop.
+ */
 @Service
-public class TransactionQueueProcessorImpl implements Callable<String>, TransactionQueueProcessor {
+public class TransactionQueueProcessorImpl implements Runnable, TransactionQueueProcessor {
 
   private final static Logger LOG = LoggerFactory.getLogger(TransactionQueueProcessorImpl.class);
 
-  private final ExecutorService executorService;
+  private final Executor executor;
   private final TransactionQueue transactionQueue;
   private final Clock clock;
   private final StatisticsCollector statisticsCollector;
   private final StatisticsCache statisticsCache;
 
   @Autowired
-  public TransactionQueueProcessorImpl(ExecutorService executorService, TransactionQueue transactionQueue, Clock clock, StatisticsCollector statisticsCollector, StatisticsCache statisticsCache) {
-    this.executorService = executorService;
+  public TransactionQueueProcessorImpl(Executor executor, TransactionQueue transactionQueue, Clock clock, StatisticsCollector statisticsCollector, StatisticsCache statisticsCache) {
+    this.executor = executor;
     this.transactionQueue = transactionQueue;
     this.clock = clock;
     this.statisticsCollector = statisticsCollector;
@@ -40,15 +44,18 @@ public class TransactionQueueProcessorImpl implements Callable<String>, Transact
   public void postConstruct() {
     LOG.debug("TransactionQueueProcessorImpl post construct");
 
-    Callable<String> callable = new TransactionQueueProcessorImpl(executorService, transactionQueue, clock, statisticsCollector, statisticsCache);
-    executorService.submit(callable);
+    executor.execute(this);
   }
 
   @Override
-  public String call() throws Exception {
+  public void run() {
     while (true) {
       process();
-      Thread.sleep(100);
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        LOG.error("Error while putting thread to sleep: ", e);
+      }
     }
   }
 

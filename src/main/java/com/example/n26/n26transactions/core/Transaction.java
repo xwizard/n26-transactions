@@ -4,6 +4,9 @@ import java.time.Clock;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents transaction data.
+ */
 public class Transaction {
 
   private final static long ONE_MINUTE = 60_000;
@@ -20,6 +23,12 @@ public class Transaction {
     this.id = UUID.randomUUID();
   }
 
+  /**
+   * Checks if transaction has expired.
+   * Currently all transaction older than 60s are considered expired.
+   * @param clock clock used to determine current time.
+   * @return true if transaction has expired.
+   */
   public boolean hasExpired(Clock clock) {
     return clock.millis() - ONE_MINUTE >= timestamp;
   }

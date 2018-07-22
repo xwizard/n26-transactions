@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
+/**
+ * Simple implementation of {@link TransactionQueue} using {@link ConcurrentLinkedDeque}.
+ */
 @Service
 public class TransactionQueueImpl implements TransactionQueue {
 
@@ -34,15 +36,6 @@ public class TransactionQueueImpl implements TransactionQueue {
 
     LOG.debug("Transaction expired {}", transaction.toString());
     return false;
-  }
-
-  @Override
-  public void putAllNonExpired(Collection<Transaction> transactions) {
-    for (Transaction t : transactions) {
-      if (!t.hasExpired(clock)) {
-        queue.add(t);
-      }
-    }
   }
 
   @Override

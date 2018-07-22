@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Calculates mean value for data series.
+ */
 @Service
 public class MeanCalculator implements StatisticCalculator<Double, Double> {
   @Override

@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Calculates minimal value from data series.
+ */
 @Service
 public class MinCalculator implements StatisticCalculator<Double, Double> {
   @Override

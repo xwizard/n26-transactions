@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Simple statistic cache implementation relying on {@link AtomicReference}.
+ */
 @Service
 public class StatisticsCacheImpl implements StatisticsCache {
 

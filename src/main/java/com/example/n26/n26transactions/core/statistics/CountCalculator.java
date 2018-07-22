@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Calculates data count.
+ */
 @Service
 public class CountCalculator implements StatisticCalculator<Double, Long> {
   @Override

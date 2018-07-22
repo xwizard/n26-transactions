@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Simple facade implementation gathering statistics values from known and hardcoded calculators.
+ */
 @Service
 public class StatisticsCollectorImpl implements StatisticsCollector {
 

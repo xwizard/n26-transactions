@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Calculates max value from given data.
+ */
 @Service
 public class MaxCalculator implements StatisticCalculator<Double, Double> {
   @Override

@@ -9,6 +9,9 @@ import java.time.Clock;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+/**
+ * Application context providing custom beans.
+ */
 @Configuration
 public class ApplicationConfiguration {
   @Bean

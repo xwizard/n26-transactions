@@ -9,6 +9,7 @@ import java.time.Clock;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Simple implementation of {@link TransactionQueue} using {@link ConcurrentLinkedDeque}.
@@ -24,7 +25,7 @@ public class TransactionQueueImpl implements TransactionQueue {
   @Autowired
   public TransactionQueueImpl(Clock clock) {
     this.clock = clock;
-    this.queue = new ConcurrentLinkedDeque<>();
+    this.queue = new ConcurrentLinkedQueue<>();
   }
 
   @Override

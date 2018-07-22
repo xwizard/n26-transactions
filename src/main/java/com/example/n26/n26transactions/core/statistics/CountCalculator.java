@@ -1,13 +1,16 @@
 package com.example.n26.n26transactions.core.statistics;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
-public class CountCalculator implements StatisticCalculator<Double, Integer> {
+@Service
+public class CountCalculator implements StatisticCalculator<Double, Long> {
   @Override
-  public Integer calculate(List<Double> data) {
+  public Long calculate(List<Double> data) {
     if (data == null || data.isEmpty()) {
-      return 0;
+      return 0L;
     }
-    return data.size();
+    return (long) data.size();
   }
 }

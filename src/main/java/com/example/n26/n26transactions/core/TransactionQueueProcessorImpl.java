@@ -1,6 +1,7 @@
 package com.example.n26.n26transactions.core;
 
-import com.example.n26.n26transactions.core.statistics.StatisticCalculator;
+import com.example.n26.n26transactions.core.statistics.StatisticsCollector;
+import com.example.n26.n26transactions.core.statistics.StatisticsSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +24,23 @@ public class TransactionQueueProcessorImpl implements Callable<String>, Transact
   private final ExecutorService executorService;
   private final TransactionQueue transactionQueue;
   private final Clock clock;
-  private final List<StatisticCalculator> calculators;
+  private final StatisticsCollector statisticsCollector;
+  private final StatisticsCache statisticsCache;
 
   @Autowired
-  public TransactionQueueProcessorImpl(ExecutorService executorService, TransactionQueue transactionQueue, Clock clock, List<StatisticCalculator> calculators) {
+  public TransactionQueueProcessorImpl(ExecutorService executorService, TransactionQueue transactionQueue, Clock clock, StatisticsCollector statisticsCollector, StatisticsCache statisticsCache) {
     this.executorService = executorService;
     this.transactionQueue = transactionQueue;
     this.clock = clock;
-    this.calculators = calculators;
+    this.statisticsCollector = statisticsCollector;
+    this.statisticsCache = statisticsCache;
   }
 
   @PostConstruct
   public void postConstruct() {
     LOG.debug("TransactionQueueProcessorImpl post construct");
 
-    Callable<String> callable = new TransactionQueueProcessorImpl(executorService, transactionQueue, clock, calculators);
+    Callable<String> callable = new TransactionQueueProcessorImpl(executorService, transactionQueue, clock, statisticsCollector, statisticsCache);
     executorService.submit(callable);
   }
 
@@ -67,9 +70,11 @@ public class TransactionQueueProcessorImpl implements Callable<String>, Transact
       currentTransactions.add(transaction);
     }
 
-    calculators.forEach(calculator -> {
-      calculator.calculate(currentTransactions.stream().map(Transaction::getAmount).collect(Collectors.toList()));
-    });
+    StatisticsSnapshot snapshot = statisticsCollector.collect(currentTransactions.stream()
+        .map(Transaction::getAmount)
+        .collect(Collectors.toList()), clock.millis());
+
+    statisticsCache.set(snapshot);
 
     long end = clock.millis();
 

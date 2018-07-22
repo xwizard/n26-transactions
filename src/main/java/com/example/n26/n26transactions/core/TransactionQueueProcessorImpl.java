@@ -51,11 +51,6 @@ public class TransactionQueueProcessorImpl implements Runnable, TransactionQueue
   public void run() {
     while (true) {
       process();
-      try {
-        Thread.sleep(10);
-      } catch (InterruptedException e) {
-        LOG.error("Error while putting thread to sleep: ", e);
-      }
     }
   }
 

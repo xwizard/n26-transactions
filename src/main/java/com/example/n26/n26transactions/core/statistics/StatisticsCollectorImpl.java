@@ -8,14 +8,14 @@ import java.util.List;
 @Service
 public class StatisticsCollectorImpl implements StatisticsCollector {
 
-  private final CountCalculator countCalculator;
-  private final MaxCalculator maxCalculator;
-  private final MeanCalculator meanCalculator;
-  private final MinCalculator minCalculator;
-  private final SumCalculator sumCalculator;
+  private final StatisticCalculator<Double, Long> countCalculator;
+  private final StatisticCalculator<Double, Double> maxCalculator;
+  private final StatisticCalculator<Double, Double> meanCalculator;
+  private final StatisticCalculator<Double, Double> minCalculator;
+  private final StatisticCalculator<Double, Double> sumCalculator;
 
   @Autowired
-  public StatisticsCollectorImpl(CountCalculator countCalculator, MaxCalculator maxCalculator, MeanCalculator meanCalculator, MinCalculator minCalculator, SumCalculator sumCalculator) {
+  public StatisticsCollectorImpl(StatisticCalculator<Double, Long> countCalculator, StatisticCalculator<Double, Double> maxCalculator, StatisticCalculator<Double, Double> meanCalculator, StatisticCalculator<Double, Double> minCalculator, StatisticCalculator<Double, Double> sumCalculator) {
     this.countCalculator = countCalculator;
     this.maxCalculator = maxCalculator;
     this.meanCalculator = meanCalculator;

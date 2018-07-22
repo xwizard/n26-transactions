@@ -52,7 +52,7 @@ public class TransactionQueueProcessorImpl implements Runnable, TransactionQueue
     while (true) {
       process();
       try {
-        Thread.sleep(100);
+        Thread.sleep(10);
       } catch (InterruptedException e) {
         LOG.error("Error while putting thread to sleep: ", e);
       }
@@ -72,6 +72,7 @@ public class TransactionQueueProcessorImpl implements Runnable, TransactionQueue
       Transaction transaction = iterator.next();
       if (transaction.hasExpired(clock)) {
         iterator.remove();
+        continue;
       }
       i++;
       currentTransactions.add(transaction);

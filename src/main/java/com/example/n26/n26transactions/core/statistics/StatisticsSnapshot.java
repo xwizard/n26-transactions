@@ -1,5 +1,7 @@
 package com.example.n26.n26transactions.core.statistics;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 /**
@@ -10,16 +12,16 @@ public class StatisticsSnapshot {
   public static final StatisticsSnapshot ZERO = new StatisticsSnapshot();
 
   private double sum = 0;
-  private double average = 0;
+  private double mean = 0;
   private double max = 0;
   private double min = 0;
   private long count = 0;
 
   private StatisticsSnapshot() {}
 
-  public StatisticsSnapshot(double sum, double average, double max, double min, long count) {
+  public StatisticsSnapshot(double sum, double mean, double max, double min, long count) {
     this.sum = sum;
-    this.average = average;
+    this.mean = mean;
     this.max = max;
     this.min = min;
     this.count = count;
@@ -29,8 +31,9 @@ public class StatisticsSnapshot {
     return sum;
   }
 
-  public double getAverage() {
-    return average;
+  @JsonProperty("avg")
+  public double getMean() {
+    return mean;
   }
 
   public double getMax() {
@@ -51,7 +54,7 @@ public class StatisticsSnapshot {
     if (o == null || getClass() != o.getClass()) return false;
     StatisticsSnapshot snapshot = (StatisticsSnapshot) o;
     return Double.compare(snapshot.sum, sum) == 0 &&
-        Double.compare(snapshot.average, average) == 0 &&
+        Double.compare(snapshot.mean, mean) == 0 &&
         Double.compare(snapshot.max, max) == 0 &&
         Double.compare(snapshot.min, min) == 0 &&
         count == snapshot.count;
@@ -60,14 +63,14 @@ public class StatisticsSnapshot {
   @Override
   public int hashCode() {
 
-    return Objects.hash(sum, average, max, min, count);
+    return Objects.hash(sum, mean, max, min, count);
   }
 
   @Override
   public String toString() {
     return "StatisticsSnapshot{" +
         "sum=" + sum +
-        ", average=" + average +
+        ", mean=" + mean +
         ", max=" + max +
         ", min=" + min +
         ", count=" + count +

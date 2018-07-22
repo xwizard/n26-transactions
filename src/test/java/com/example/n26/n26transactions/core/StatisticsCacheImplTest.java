@@ -19,7 +19,7 @@ public class StatisticsCacheImplTest {
 
   @Test
   public void setShouldSetStatistic() {
-    StatisticsSnapshot statisticsSnapshot = new StatisticsSnapshot(0,0,0,0,0,0);
+    StatisticsSnapshot statisticsSnapshot = new StatisticsSnapshot(0,0,0,0,0);
     cache.set(statisticsSnapshot);
     StatisticsSnapshot actual = cache.get();
 

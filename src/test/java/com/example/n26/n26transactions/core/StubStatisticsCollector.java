@@ -16,7 +16,7 @@ class StubStatisticsCollector implements StatisticsCollector {
   private List<Double> data = Collections.emptyList();
 
   @Override
-  public StatisticsSnapshot collect(List<Double> data, long timestamp) {
+  public StatisticsSnapshot collect(List<Double> data) {
     this.data = data;
     return StatisticsSnapshot.ZERO;
   }

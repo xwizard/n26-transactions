@@ -27,13 +27,13 @@ public class StatisticsCollectorImpl implements StatisticsCollector {
   }
 
   @Override
-  public StatisticsSnapshot collect(List<Double> data, long timestamp) {
+  public StatisticsSnapshot collect(List<Double> data) {
     long count = countCalculator.calculate(data);
     double max = maxCalculator.calculate(data);
     double mean = meanCalculator.calculate(data);
     double min = minCalculator.calculate(data);
     double sum = sumCalculator.calculate(data);
 
-    return new StatisticsSnapshot(timestamp, sum, mean, max, min, count);
+    return new StatisticsSnapshot(sum, mean, max, min, count);
   }
 }

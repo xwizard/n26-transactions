@@ -17,7 +17,7 @@ public class StatisticsCollectorImplTest {
 
   @Test
   public void collectorShouldCollectAllStatistics() {
-    StatisticsSnapshot actual = collector.collect(Arrays.asList(1.0, 2.0, 3.0), 0);
+    StatisticsSnapshot actual = collector.collect(Arrays.asList(1.0, 2.0, 3.0));
     assertEquals(10, actual.getCount());
     assertEquals(1.0, actual.getMax(), 0.1);
     assertEquals(2.0, actual.getAverage(), 0.1);

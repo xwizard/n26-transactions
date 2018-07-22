@@ -75,7 +75,7 @@ public class TransactionQueueProcessorImpl implements Runnable, TransactionQueue
 
     StatisticsSnapshot snapshot = statisticsCollector.collect(currentTransactions.stream()
         .map(Transaction::getAmount)
-        .collect(Collectors.toList()), clock.millis());
+        .collect(Collectors.toList()));
 
     statisticsCache.set(snapshot);
 

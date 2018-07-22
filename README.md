@@ -19,7 +19,7 @@ However, it might be possible that for some larger amounts of date this time wil
 - Use parallel streams in statistic calculators (that won't boost performance much, probably)  
 - Parallel statistics calculation. Executor should be replaced
 by ExecutorService and passed to statistics collector. All statistics we currently
-have can be calculated partially. We divide data intu chunks and process them in parallel, using Future to wait for all
+have can be calculated partially. We divide data into chunks and process them in parallel, using Future to wait for all
 tasks. Then we recalculate partial.
 - Switch to enterprise grade stream processing solution.
 

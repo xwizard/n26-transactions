@@ -9,8 +9,7 @@ public interface StatisticsCollector {
   /**
    * Collects all known statistics.
    * @param data data to collect from
-   * @param timestamp current timestamp
    * @return {@link StatisticsSnapshot} instance
    */
-  StatisticsSnapshot collect(List<Double> data, long timestamp);
+  StatisticsSnapshot collect(List<Double> data);
 }

@@ -1,6 +1,6 @@
 # N26 transactions
 ## Assumptions
-- Configuring Kafka is not 
+- Configuring Kafka is not objective of this task
 - Application is eventually consistent
 - Stable POST and GET times are crucial and most important
 - Latency should be minimal
@@ -16,11 +16,12 @@ Processing all statistics works takes less than 1ms for about 2500 transactions 
 However, it might be possible that for some larger amounts of date this time will increase significantly.
 
 ## Possible future solutions
-- use parallel streams in statistic calculators (that won't boost performance much, probably)  
-- parallel statistics calculation. Executor should be replaced
+- Use parallel streams in statistic calculators (that won't boost performance much, probably)  
+- Parallel statistics calculation. Executor should be replaced
 by ExecutorService and passed to statistics collector. All statistics we currently
 have can be calculated partially. We divide data intu chunks and process them in parallel, using Future to wait for all
 tasks. Then we recalculate partial.
+- Switch to enterprise grade stream processing solution.
 
 ## Building
 `mvn install`
